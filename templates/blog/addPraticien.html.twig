@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+     <div class="row">
+    <div class="col">{{ form_row(form.profile) }}</div>
+    <div class="col">{{ form_row(form.phone,{'attr':{'placeholder':'+21600000000'}}) }}</div>
+</div>
+<div class="row">
+    <div class="col">{{ form_row(form.speciality) }}</div>
+    <div class="col">{{ form_row(form.status) }}</div>
+</div>
+ {{ form_rest(form) }}
+{% endblock %}
+
+{% block title %}
+{% endblock %}
