@@ -27,7 +27,7 @@ class Praticien
     private ?string $phone = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Status $status = null;
 
     #[ORM\ManyToMany(targetEntity: Speciality::class)]
@@ -38,6 +38,15 @@ class Praticien
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $firstName = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $lastName = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Calendrier $calendrier = null;
 
     public function __construct()
     {
@@ -130,6 +139,46 @@ class Praticien
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+    public function __toString()
+    { 
+         return $this->firstName." ".$this->lastName." ".$this->profile." ".$this->phone." ".$this->adress." ".$this->speciality." ".$this->status;  
+    }
+
+    public function getCalendrier(): ?Calendrier
+    {
+        return $this->calendrier;
+    }
+
+    public function setCalendrier(?Calendrier $calendrier): self
+    {
+        $this->calendrier = $calendrier;
 
         return $this;
     }

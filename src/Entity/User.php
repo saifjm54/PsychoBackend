@@ -30,13 +30,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 50)]
     private ?string $username = null;
-
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $firstname = null;
-
-    #[ORM\Column(length: 70, nullable: true)]
-    private ?string $lastname = null;
-
     #[ORM\Column]
     private ?bool $is_active = null;
 
@@ -124,31 +117,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(?string $firstname): self
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    public function getLastname(): ?string
-    {
-        return $this->lastname;
-    }
-
-    public function setLastname(?string $lastname): self
-    {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
     public function isIsActive(): ?bool
     {
         return $this->is_active;
@@ -174,6 +142,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
     public function __toString()
     { 
-         return $this->email." ".$this->username." ".$this->firstname." ".$this->lastname." ".$this->password;  
+         return $this->email." ".$this->username." ".$this->password;  
     }
 }

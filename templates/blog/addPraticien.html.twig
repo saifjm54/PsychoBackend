@@ -2,15 +2,19 @@
 {% block content %}
 {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
      <div class="row">
-    <div class="col">{{ form_row(form.profile) }}</div>
-    <div class="col">{{ form_row(form.phone,{'attr':{'placeholder':'+21600000000'}}) }}</div>
+    <div class="col">{{ form_row(form.FirstName) }}</div>
+    <div class="col">{{ form_row(form.LastName) }}</div>
 </div>
+
 <div class="row">
-    <div class="col">{{ form_row(form.speciality) }}</div>
-    <div class="col">{{ form_row(form.status) }}</div>
+    <div class="col">{{ form_row(form.phone,{'attr':{'placeholder':'(+216)00000000'}}) }}</div>
 </div>
  {{ form_rest(form) }}
 {% endblock %}
 
 {% block title %}
+Praticien
+{% endblock %}
+{% block link %} 
+<a href="{{ path('patient.add') }}">S'inscrire Patient</a>
 {% endblock %}

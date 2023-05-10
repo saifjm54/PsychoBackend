@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+     <div class="row">
+    <div class="col">{{ form_row(form.username) }}</div>
+</div>
+<div class="row">
+     <div class="col">{{ form_row(form.email) }}</div>
+</div>
+<div class="row">
+    <div class="col">{{ form_row(form.password) }}</div>
+</div>
+ {{ form_rest(form) }}
+{% endblock %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block link %} 
+{% if link == 'Patient' %}
+ <a href="{{ path('praticien.add') }}">S'inscrire Praticien</a>
+{% else %}
+<a href="{{ path('patient.add') }}">S'inscrire Patient</a>
+{% endif %}
+
+{% endblock %}
+{% block subTitle %}
+    Nouveau Compte
+{% endblock %}

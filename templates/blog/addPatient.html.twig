@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+<div class="row">
+    <div class="col">{{ form_row(form.firstname) }}</div>
+</div>
+<div class="row">
+    <div class="col">{{ form_row(form.lastname) }}</div>
+</div>
+     <div class="row">
+    <div class="col">{{ form_row(form.tel,{'attr':{'placeholder':'(+216)00000000'}}) }}</div>
+</div>
+<div class="row">
+    <div class="col">{{ form_row(form.birthday) }}</div>
+    <div class="col">{{ form_row(form.gender) }}</div>
+</div>
+ {{ form_rest(form) }}
+{% endblock %}
+
+{% block title %}
+Patient
+{% endblock %}
+{% block link %} 
+<a href="{{ path('praticien.edit') }}">S'inscrire Praticien</a>
+{% endblock %}

@@ -10,7 +10,7 @@ class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create('fr-FR');
+        /* $faker = Factory::create('fr-FR');
         // $product = new Product();
         // $manager->persist($product);
         for($i=0;$i<50;$i++){
@@ -23,7 +23,7 @@ class UserFixtures extends Fixture
             $user->setIsActive(false);
             $user->setDateJoined($faker->dateTime($max = 'now',$timezone = null));
             $manager->persist($user);
-        }
+        }*/
 
         $manager->flush();
     }
