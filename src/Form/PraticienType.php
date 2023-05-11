@@ -22,7 +22,7 @@ class PraticienType extends AbstractType
             ->add('phone')
             ->add('status')
             ->add('speciality')
-            ->add('adress')
+            ->add('adress',AdressType::class)
             ->add('image', FileType::class, [
                 'label' => 'Votre image de profil (Des fichiers images uniquement)',
 

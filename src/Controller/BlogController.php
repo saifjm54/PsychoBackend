@@ -96,13 +96,24 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $repository = $doctrine->getRepository(User::class);
+            if($repository->findBy(['email' => $user->getEmail()]))
+            {
+                $this->addFlash('error','A profile with this email address already exists!');
+                return $this->redirectToRoute('praticien.add');
+            }
+            if($repository->findBy(['username' => $user->getUsername()]))
+            {
+                $this->addFlash('error','This username already exists!');
+                return $this->redirectToRoute('praticien.add');
+            }
             $user->setIsActive(false);
             $praticien->setProfile($user);
             $manager = $doctrine->getManager();
             $manager->persist($user);
             $manager->persist($praticien);
             $manager->flush();
-            $this->addFlash('succes',$praticien->getProfile()."a été ajouté avec succés");
+            $this->addFlash('success',$praticien->getProfile()->getUsername()."a été ajouté avec succés");
             return $this->redirectToRoute('praticien.edit',['id'=>$praticien->getId()]);
         }
         else{
@@ -126,6 +137,13 @@ class BlogController extends AbstractController
         //Verifier si le formulaire a été soumis ou pas
         if($form->isSubmitted() && $form->isValid()){
             $image = $form->get('image')->getData();
+            $adress = $form->get('adress')->getData();
+           if(!$adress->getId()){
+            $manager = $doctrine->getManager();
+            $manager->persist($adress);
+            $manager->flush();  
+            $praticien->setAdress($adress);
+           }
 
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
@@ -148,14 +166,16 @@ class BlogController extends AbstractController
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
                 $praticien->setImage($newFilename);
+                
+
             }
-              $manager = $doctrine->getManager();
-              $manager->persist($praticien);
-              $manager->flush();
+            $manager = $doctrine->getManager();
+            $manager->persist($praticien);
+            $manager->flush();
               if($new){
-                $this->addFlash('succes',$praticien->getProfile()."a été ajouté avec succés");
+                $this->addFlash('success',$praticien->getProfile()->getUsername()."a été ajouté avec succés");
               }else{
-                $this->addFlash('succes',$praticien->getProfile()."a été modifié avec succés");
+                $this->addFlash('success',$praticien->getProfile()->getUsername()."a été modifié avec succés");
               }
               
               return $this->redirectToRoute('praticien.profile',['id' => $praticien->getId()]);
@@ -185,7 +205,7 @@ class BlogController extends AbstractController
             $manager->persist($user);
             $manager->persist($patien);
             $manager->flush();
-            $this->addFlash('succes',$patien->getUser()."a été ajouté avec succés");
+            $this->addFlash('success',$patien->getUser()."a été ajouté avec succés");
             return $this->redirectToRoute('patient.edit',['id'=>$patien->getId()]);
         }
         else{
@@ -228,9 +248,9 @@ class BlogController extends AbstractController
                     $manager->flush();
                 }
               if($new){
-                $this->addFlash('succes',$patien->getUser()."a été ajouté avec succés");
+                $this->addFlash('success',$patien->getUser()."a été ajouté avec succés");
               }else{
-                $this->addFlash('succes',$patien->getUser()."a été modifié avec succés");
+                $this->addFlash('success',$patien->getUser()."a été modifié avec succés");
               }
               
               return $this->redirectToRoute('home');}
@@ -284,9 +304,9 @@ class BlogController extends AbstractController
                   $manager->persist($praticien);
                   $manager->flush();
                   if($new){
-                    $this->addFlash('succes',$calendrier->getId()."a été ajouté avec succés");
+                    $this->addFlash('success',$calendrier->getId()."a été ajouté avec succés");
                   }else{
-                    $this->addFlash('succes',$calendrier->getId()."a été modifié avec succés");
+                    $this->addFlash('success',$calendrier->getId()."a été modifié avec succés");
                   }
                   
                   return $this->redirectToRoute('praticien.profile',['id' => $praticien->getId()]);

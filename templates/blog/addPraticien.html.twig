@@ -9,6 +9,24 @@
 <div class="row">
     <div class="col">{{ form_row(form.phone,{'attr':{'placeholder':'(+216)00000000'}}) }}</div>
 </div>
+<div class="row">
+    <div class="col">{{ form_row(form.status) }}</div>
+</div>
+<div class="row">
+    <div class="col">{{ form_row(form.speciality) }}</div>
+</div>
+<div class="row">
+    <div class="col">{{ form_row(form.adress.country) }}</div>
+</div>
+<div class="row">
+    <div class="col">{{ form_row(form.adress.city) }}</div>
+</div>
+<div class="row">
+    <div class="col">{{ form_row(form.adress.zipcode) }}</div>
+</div>
+<div class="row">
+    <div class="col">{{ form_row(form.adress.street) }}</div>
+</div>
  {{ form_rest(form) }}
 {% endblock %}
 
